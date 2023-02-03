@@ -6,6 +6,11 @@ import {
 } from 'react-router-dom';
 import './index.css';
 import Root from './routes/root';
+import Goals from './routes/goals';
+import Reflect from './routes/reflect';
+import ToDo from './routes/todo';
+import Study from './routes/study';
+import DeckView from './routes/deckView';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -13,6 +18,27 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
   },
+  {
+    path: "goals",
+    element: <Goals />,
+  },
+  {
+    path: "reflect",
+    element: <Reflect />,
+  },
+  {
+    path: "todo",
+    element: <ToDo />,
+  },
+  {
+    path: "study",
+    element: <Study />,
+  },
+  {
+    path: "study/:deckName",
+    element: <DeckView />,
+  },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
