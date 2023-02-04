@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const DeckSchema = new mongoose.Schema({
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "User",
     require: true,
   },
@@ -26,3 +26,6 @@ const DeckSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Deck", DeckSchema);
+
+
+// mongoose.Schema.Types.ObjectId <= update created by type once user build is in place
