@@ -1,5 +1,6 @@
 import Navigation from '../components/Navigation';
 import Header from '../components/Header';
+import DecksStudyDash from '../components/DecksStudyDash';
 
 function Study() {
     return (
@@ -15,6 +16,7 @@ function Study() {
                 {/* <code classname='block h-52' contenteditable='true'>
                     write your code here
                 </code> */}
+                <DecksStudyDash />
             </section>
         </div>
       </div>
