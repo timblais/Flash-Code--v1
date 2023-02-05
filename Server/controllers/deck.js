@@ -16,4 +16,13 @@ module.exports = {
           console.log(err);
         }
       },
+
+    getDecks: async (req, res) => {
+      try {
+        const decks = await Deck.find({ createdBy: 'preUserPlaceholder'});
+        res.json({decks: decks})
+      } catch (err) {
+        console.log(err)
+      }
+    }
 }
