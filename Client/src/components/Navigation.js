@@ -9,7 +9,7 @@ const Navigation = () => {
             
             <NavLink 
             text = 'Dashboard'
-            link = ''
+            link = 'dashboard'
             />
             <NavLink 
             text = 'To Do List'

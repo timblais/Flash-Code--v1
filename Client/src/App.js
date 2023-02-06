@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Root from './routes/root';
+import Dashboard from './routes/dashboard'
+import Goals from './routes/goals';
+import Reflect from './routes/reflect';
+import ToDo from './routes/todo';
+import Study from './routes/study';
+import DeckView from './routes/deckView';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/' element={<Root />} />
+      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/goals' element={<Goals />} />
+      <Route path='/Reflect' element={<Reflect />} />
+      <Route path='/todo' element={<ToDo />} />
+      <Route path='/study' element={<Study />} />
+      <Route path='/study/:deckName' element={<DeckView />} />
+    </Routes>
   );
 }
 

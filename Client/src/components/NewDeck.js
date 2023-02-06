@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from './Button'
+import Button from './buttons/Button'
 
 
 const NewDeck = ({ type, name, onClick }) => {
