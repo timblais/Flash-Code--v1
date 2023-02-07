@@ -1,21 +1,27 @@
 import { useState, useEffect } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 import DeckPreview from './DeckPreview';
 import NewDeck from './NewDeck'
 // import DeckPreview from './DeckPreview'
 
 const DecksStudyDash = () => {    
     
-    const [returnedDecks, setReturnedDecks] = useState([])
+    const [returnedDecks, setReturnedDecks] = useState([]);
+    const { getAccessTokenSilently } = useAuth0();
     const decks = []
 
     // fetch decks from db
 
     useEffect(() => {
-        const getDecks = async (req,res) => {
+        const getDecks = async () => {
             try {
+                const accessToken = await getAccessTokenSilently()
                 const response = await fetch('/deck', {
                     method: 'GET',
-                    headers: {'Content-type': 'application/json'},
+                    headers: {
+                        'Content-type': 'application/json',
+                        Authorization: `Bearer ${accessToken}`,
+                    },
                 })
                 const data = await response.json()
                 setReturnedDecks(data['decks'])
@@ -26,7 +32,7 @@ const DecksStudyDash = () => {
         }
         
         getDecks();
-    }, [])
+    }, [getAccessTokenSilently])
 
 
     for (const deck of returnedDecks){

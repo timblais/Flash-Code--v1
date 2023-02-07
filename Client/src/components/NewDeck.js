@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 import Button from './buttons/Button'
 
 
 const NewDeck = ({ type, name, onClick }) => {
+    
+    const { user, isAuthenticated } = useAuth0();
+    console.log(isAuthenticated)
+    console.log(user)
     
     const [enterNewDeck, setEnterNewDeck] = useState(false)
     const [formValue, setFormValue] = useState(null)

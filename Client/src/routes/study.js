@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import DecksStudyDash from '../components/DecksStudyDash';
 
 function Study() {
-    return (
+  return (
       // Complete view box
       <div className='w-full h-screen flex flex-row justify-start items-start'> 
         <Navigation />
