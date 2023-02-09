@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 // const MongoStore = require('connect-mongo')
 const flash = require('express-flash')
 const connectDB = require('./config/database')
+// const { auth } = require('express-oauth2-jwt-bearer');
 
 //Route Variables
 const deckRoutes = require('./routes/deck.js')
@@ -32,6 +33,15 @@ app.use(express.json())
 //   )
 
 app.use(flash())
+
+// const jwtCheck = auth({
+//     audience: process.env.AUTH0_AUDIENCE,
+//     issuerBaseURL: process.env.AUTH0_DOMAIN,
+//     tokenSigningAlg: 'RS256'
+//   });
+  
+//   // enforce on all endpoints
+//   app.use(jwtCheck);
 
 // Routes
 app.use('/deck', deckRoutes)

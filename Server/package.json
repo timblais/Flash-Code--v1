@@ -4,6 +4,7 @@
   "description": "Reflector",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tim Blais",
@@ -13,6 +14,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-flash": "^0.0.2",
+    "express-oauth2-jwt-bearer": "^1.3.0",
     "express-session": "^1.17.3",
     "mongodb": "^5.0.0",
     "mongoose": "^6.9.0",
