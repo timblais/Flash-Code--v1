@@ -3,11 +3,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Button from './buttons/Button'
 
 
-const NewDeck = ({ type, name, onClick }) => {
-    
-    const { user, isAuthenticated } = useAuth0();
-    console.log(isAuthenticated)
-    console.log(user)
+const NewDeck = ({ reload }) => {
+    const { user } = useAuth0();
+    // console.log(reload)
     
     const [enterNewDeck, setEnterNewDeck] = useState(false)
     const [formValue, setFormValue] = useState(null)
@@ -24,11 +22,13 @@ const NewDeck = ({ type, name, onClick }) => {
                     headers: {'Content-type': 'application/json'},
                     body: JSON.stringify({
                         'deckTitle': formValue,
+                        'user': user.sub
                     })
                 })
                 const data = await response.json()
                 console.log(data)
-                window.location.reload()
+                setEnterNewDeck(false)
+                reload(1)
             }catch(err){
                 console.log(err)
             }
@@ -46,7 +46,10 @@ const NewDeck = ({ type, name, onClick }) => {
           )
     }else{
         return (
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                console.log('submitted worked');
+            }}>
                 <input placeholder='Enter a Deck Name' name='deckTitle' id='deckTitle' onChange={(e) => setFormValue(e.target.value)} />
                 <Button 
                     type = 'button'

@@ -6,33 +6,65 @@ import NewDeck from './NewDeck'
 
 const DecksStudyDash = () => {    
     
+    const { user, getAccessTokenSilently } = useAuth0();
     const [returnedDecks, setReturnedDecks] = useState([]);
-    const { getAccessTokenSilently } = useAuth0();
+    const [fetchDecks, setFetchDecks] = useState(true)
     const decks = []
+    console.log('parent rendered')
+
+    const getDecks = async (user) => {
+                try {
+                    const accessToken = await getAccessTokenSilently()
+                    const response = await fetch(`/deck/${user.sub}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-type': 'application/json',
+                            Authorization: `Bearer ${accessToken}`,
+                        },
+                    })
+                    const data = await response.json()
+                    setFetchDecks(false)
+                    setReturnedDecks(data['decks'])
+                    console.log(fetchDecks)
+                    console.log(data)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+    
+    function refreshDecks(val) {
+        console.log('Refresh callback triggered')
+        setFetchDecks(true)
+    }
+
+    if(fetchDecks === true){
+        getDecks(user)
+    }
 
     // fetch decks from db
 
-    useEffect(() => {
-        const getDecks = async () => {
-            try {
-                const accessToken = await getAccessTokenSilently()
-                const response = await fetch('/deck', {
-                    method: 'GET',
-                    headers: {
-                        'Content-type': 'application/json',
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                })
-                const data = await response.json()
-                setReturnedDecks(data['decks'])
-                console.log(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
+    // useEffect(() => {
+    //     const getDecks = async (user) => {
+    //         try {
+    //             const accessToken = await getAccessTokenSilently()
+    //             const response = await fetch(`/deck/${user.sub}`, {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Content-type': 'application/json',
+    //                     Authorization: `Bearer ${accessToken}`,
+    //                 },
+    //             })
+    //             const data = await response.json()
+    //             setReturnedDecks(data['decks'])
+    //             console.log(user.sub)
+    //             console.log(data)
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
         
-        getDecks();
-    }, [getAccessTokenSilently])
+    //     getDecks(user);
+    // }, [user, getAccessTokenSilently])
 
 
     for (const deck of returnedDecks){
@@ -52,7 +84,8 @@ const DecksStudyDash = () => {
             <h1>
                 My Decks
             </h1>
-            <NewDeck />
+            <NewDeck 
+            reload = {refreshDecks}/>
             {decks}
        </section> 
   )

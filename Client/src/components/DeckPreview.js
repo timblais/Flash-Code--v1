@@ -8,7 +8,7 @@ const DeckPreview = ({ deckName, totalCards}) => {
                 {deckName}
             </h3>
             <span>
-                {totalCards}
+                {totalCards} Cards
             </span>
        </div> 
   )
