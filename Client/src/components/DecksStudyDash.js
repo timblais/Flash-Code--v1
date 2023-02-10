@@ -22,7 +22,7 @@ const DecksStudyDash = () => {
         const getDecks = async (user) => {
             try {
                 const accessToken = await getAccessTokenSilently()
-                const response = await fetch(`/deck/${user.sub}`, {
+                const response = await fetch(`/deck/byuser/${user.sub}`, {
                     method: 'GET',
                     headers: {
                         'Content-type': 'application/json',
@@ -44,6 +44,7 @@ const DecksStudyDash = () => {
     for (const deck of returnedDecks){
         decks.push(
             <DeckPreview 
+                id = {deck['_id']}
                 deckName = {deck['title']}
                 totalCards = {deck['totalCards']}
             />

@@ -31,7 +31,7 @@ function App() {
       <Route path='/Reflect' element={<AuthCheck component={Reflect} />} />
       <Route path='/todo' element={<AuthCheck component={ToDo} />} />
       <Route path='/study' element={<AuthCheck component={Study} />} />
-      <Route path='/study/:deckName' element={<AuthCheck component={DeckView} />} />
+      <Route path='/study/view/:deckId' element={<AuthCheck component={DeckView} />} />
     </Routes>
   );
 }
