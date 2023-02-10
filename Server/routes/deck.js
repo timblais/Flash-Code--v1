@@ -3,6 +3,7 @@ const router = express.Router()
 const deckController = require('../controllers/deck') 
 
 router.post('/', deckController.createDeck)
-router.get('/:user', deckController.getDecks)
+router.get('/byuser/:userId', deckController.getUserDecks)
+router.get('/bydeck/:userId/:deckId', deckController.getDeckandCards)
 
 module.exports = router

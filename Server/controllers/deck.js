@@ -1,5 +1,5 @@
 const Deck = require('../models/Deck');
-
+const Card = require('../models/Card');
 
 module.exports = {
     createDeck: async (req, res) => {
@@ -10,19 +10,31 @@ module.exports = {
             title: req.body.deckTitle,
             totalCards: 0,
           });
-          console.log("Deck has been created");
           res.json('Deck has been created');
         } catch (err) {
           console.log(err);
         }
       },
 
-    getDecks: async (req, res) => {
-      const user = req.params.user
-      console.log(req.params.user)
+    getUserDecks: async (req, res) => {
+      const user = req.params.userId
       try {
         const decks = await Deck.find({ createdBy: user});
         res.json({decks: decks})
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    getDeckandCards: async (req, res) => {
+      const user = req.params.userId
+      const deck = req.params.deckId
+      try {
+        const myDeck = await Deck.find({ createdBy: user, _id: deck});
+        const deckCards = await Card.find({createdBy: user, deck: deck});
+        res.json({deck: myDeck, cards: deckCards})
+        console.log(myDeck)
+        console.log('getDeckAndCards called')
       } catch (err) {
         console.log(err)
       }

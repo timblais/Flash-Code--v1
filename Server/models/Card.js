@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const CardSchema = new mongoose.Schema({
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "User",
     require: true,
   },
@@ -10,6 +10,11 @@ const CardSchema = new mongoose.Schema({
   createdDate: {
     type: Date,
     default: Date.now,
+    require: true,
+  },
+
+  title: {
+    type: String,
     require: true,
   },
 
