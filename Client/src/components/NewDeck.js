@@ -3,10 +3,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Button from './buttons/Button'
 
 
-const NewDeck = ({ reload }) => {
+const NewDeck = ({ deckRefresh }) => {
     const { user } = useAuth0();
-    // console.log(reload)
-    
     const [enterNewDeck, setEnterNewDeck] = useState(false)
     const [formValue, setFormValue] = useState(null)
 
@@ -28,7 +26,7 @@ const NewDeck = ({ reload }) => {
                 const data = await response.json()
                 console.log(data)
                 setEnterNewDeck(false)
-                reload(1)
+                deckRefresh()
             }catch(err){
                 console.log(err)
             }
