@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import CardListItem from './CardListItem';
+import Button from './buttons/Button';
 
 const DeckViewEdit = ({ id }) => {
     const { user, getAccessTokenSilently } = useAuth0();
     const [returnedDeck, setReturnedDeck] = useState({});
     const [returnedCards, setReturnedCards] = useState([]);
     const [fetchDetails, setFetchDetails] = useState(0);
-    const [showCard, setShowCard] = useState({})
+    const [cardDisplay, setCardDisplay] = useState({})
     const cards = []
+    console.log(id)
 
 
     function showClickedCard(id, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, ){
-        setShowCard({
+        setCardDisplay({
+            newCard: false,
+            editCard: false,
             id: id,
             createdDate: createdDate, 
             dueDate: dueDate, 
@@ -25,6 +29,12 @@ const DeckViewEdit = ({ id }) => {
             easinessFactor: easinessFactor, 
             repetitionInterval: repetitionInterval, 
             totalViews: totalViews, 
+        })
+    }
+
+    function createNewCard(){
+        setCardDisplay({
+            newCard: true,
         })
     }
     
@@ -48,6 +58,7 @@ const DeckViewEdit = ({ id }) => {
                 })
                 const data = await response.json()
                 // create an array of returned deck objects
+                console.log(data)
                 setReturnedDeck(data['deck'])
                 setReturnedCards(data['cards'])
             } catch (error) {
@@ -85,6 +96,11 @@ const DeckViewEdit = ({ id }) => {
              <h1>
                  {returnedDeck['title']}
              </h1>
+             <Button
+                type = 'button'
+                name = 'New Card'
+                onClick = {createNewCard}
+             />
              {cards}
         </section> 
    )
