@@ -9,6 +9,7 @@ const connectDB = require('./config/database')
 
 //Route Variables
 const deckRoutes = require('./routes/deck.js')
+const cardRoutes = require('./routes/card.js')
 
 // .ENV setup
 require('dotenv').config({path: './config/.env'})
@@ -45,6 +46,7 @@ app.use(flash())
 
 // Routes
 app.use('/deck', deckRoutes)
+app.use('/card', cardRoutes)
 
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')

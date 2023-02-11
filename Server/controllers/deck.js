@@ -32,8 +32,8 @@ module.exports = {
       try {
         const myDeck = await Deck.find({ createdBy: user, _id: deck});
         const deckCards = await Card.find({createdBy: user, deck: deck});
-        res.json({deck: myDeck, cards: deckCards})
-        console.log(myDeck)
+        res.json({deck: myDeck[0], cards: deckCards})
+        console.log(myDeck[0])
         console.log('getDeckAndCards called')
       } catch (err) {
         console.log(err)
