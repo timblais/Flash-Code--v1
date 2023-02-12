@@ -1,16 +1,19 @@
 const Card = require('../models/Card');
-const Deck = require('..models/Deck')
+const Deck = require('../models/Deck')
 
 module.exports = {
     createCard: async (req, res) => {
         try {
-            const deck = await Deck.find({_id: req.body.deckId})
-            await Deck.findOneAndUpdate({_id: req.body.deckId}, {totalCards: totalCards + 1})
+            console.log(req.body)
+            // const deck = await Deck.find({_id: req.body.deckId})
+            const deck = await Deck.findOneAndUpdate({_id: req.body.deckId}, {$inc: { totalCards: 1}}, {new: true})
+            console.log(deck)
+            // 
           
             await Card.create({
                 createdBy: req.body.user,
                 createdDate: new Date(),
-                title: `Card ${deck.totalCards + 1}`,
+                title: `Card ${deck.totalCards}`,
                 dueDate: new Date(),
                 deck: req.body.deckId,
                 question: req.body.question,
