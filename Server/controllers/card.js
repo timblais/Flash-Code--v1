@@ -4,11 +4,7 @@ const Deck = require('../models/Deck')
 module.exports = {
     createCard: async (req, res) => {
         try {
-            console.log(req.body)
-            // const deck = await Deck.find({_id: req.body.deckId})
             const deck = await Deck.findOneAndUpdate({_id: req.body.deckId}, {$inc: { totalCards: 1}}, {new: true})
-            console.log(deck)
-            // 
           
             await Card.create({
                 createdBy: req.body.user,
@@ -28,5 +24,13 @@ module.exports = {
           console.log(err);
         }
     },
+
+    editCard: async (req, res) => {
+      try {
+          
+      } catch (err) {
+        console.log(err);
+      }
+  },
 
 }
