@@ -2,22 +2,24 @@ import { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import CardListItem from './CardListItem';
 import Button from './buttons/Button';
+import CardDisplay from './CardDisplay';
 
-const DeckViewEdit = ({ id }) => {
+const DeckViewEdit = ({ deckId }) => {
     const { user, getAccessTokenSilently } = useAuth0();
     const [returnedDeck, setReturnedDeck] = useState({});
     const [returnedCards, setReturnedCards] = useState([]);
     const [fetchDetails, setFetchDetails] = useState(0);
     const [cardDisplay, setCardDisplay] = useState({})
     const cards = []
-    console.log(id)
+    console.log(deckId)
 
 
-    function showClickedCard(id, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, ){
+    function showClickedCard(cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, ){
+        console.log('click passed up')
         setCardDisplay({
             newCard: false,
             editCard: false,
-            id: id,
+            cardId: cardId,
             createdDate: createdDate, 
             dueDate: dueDate, 
             title: title, 
@@ -35,13 +37,17 @@ const DeckViewEdit = ({ id }) => {
     function createNewCard(){
         setCardDisplay({
             newCard: true,
+            deck: deckId,
         })
     }
     
     // Callback for use in child newDeck form to refresh after submit
-    function refreshDetails() {
+    function saveAndRefresh() {
         console.log('Refresh callback triggered')
         setFetchDetails(fetchDetails + 1)
+        setCardDisplay({
+            savedCard: true
+        })
     }
 
     // fetch decks from db
@@ -66,14 +72,14 @@ const DeckViewEdit = ({ id }) => {
             }
         }
         
-        getDeckDetails(user, id);
-    }, [user, id, getAccessTokenSilently, fetchDetails])
+        getDeckDetails(user, deckId);
+    }, [user, deckId, getAccessTokenSilently, fetchDetails])
 
     // iterate over array of cards and push preview components to array cards
     for (const card of returnedCards){
         cards.push(
             <CardListItem 
-                id = {card['_id']}
+                cardId = {card['_id']}
                 createdDate =  {card['createdDate']}
                 dueDate = {card['dueDate']}
                 title = {card['title']}
@@ -92,16 +98,39 @@ const DeckViewEdit = ({ id }) => {
     }
 
     return (
-        <section>
-             <h1>
-                 {returnedDeck['title']}
-             </h1>
-             <Button
-                type = 'button'
-                name = 'New Card'
-                onClick = {createNewCard}
-             />
-             {cards}
+        <section className="w-full flex flex-row justify-between items-start">
+             <section className='px-8'>
+                <h1>
+                    {returnedDeck['title']}
+                </h1>
+                <Button
+                    type = 'button'
+                    name = 'New Card'
+                    onClick = {createNewCard}
+                />
+                {cards}
+             </section>
+             <section className='px-8'>
+                <CardDisplay 
+                    newCard = {cardDisplay.newCard}
+                    editCard = {cardDisplay.editCard}
+                    savedCard = {cardDisplay.savedCard}
+                    cardId = {cardDisplay.cardId}
+                    createdDate = {cardDisplay.createdDate}
+                    dueDate = {cardDisplay.dueDate}
+                    title = {cardDisplay.title}
+                    createdBy = {cardDisplay.createdBy}
+                    deck = {cardDisplay.deck}
+                    question = {cardDisplay.question}
+                    answer = {cardDisplay.answer}
+                    repetitionNumber = {cardDisplay.repetitionNumber}
+                    easinessFactor = {cardDisplay.easinessFactor}
+                    repetitionInterval = {cardDisplay.repetitionInterval}
+                    totalViews = {cardDisplay.totalViews}
+                    saveAndRefresh = {saveAndRefresh}
+                />
+             </section>
+
         </section> 
    )
 

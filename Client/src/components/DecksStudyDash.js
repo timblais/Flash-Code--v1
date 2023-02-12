@@ -44,7 +44,7 @@ const DecksStudyDash = () => {
     for (const deck of returnedDecks){
         decks.push(
             <DeckPreview 
-                id = {deck['_id']}
+                deckId = {deck['_id']}
                 deckName = {deck['title']}
                 totalCards = {deck['totalCards']}
             />

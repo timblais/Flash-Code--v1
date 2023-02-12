@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-const DeckPreview = ({ id, deckName, totalCards}) => {    
-    const url = `/study/view/${id}`
+const DeckPreview = ({ deckId, deckName, totalCards}) => {    
+    const url = `/study/view/${deckId}`
     return (
        <div>
             <h3>

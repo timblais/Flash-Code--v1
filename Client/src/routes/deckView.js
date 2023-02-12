@@ -16,10 +16,10 @@ function DeckView() {
             <Header 
             title = 'Study'
             />
-            <section>
+            <section className='w-full'>
                 Deck Body Here
                 <DeckViewEdit 
-                id={deckId}/>
+                deckId={deckId}/>
             </section>
         </div>
       </div>

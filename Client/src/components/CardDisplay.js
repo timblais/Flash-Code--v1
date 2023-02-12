@@ -1,18 +1,24 @@
 import CardHeader from "./CardHeader";
 import CardForm from "./CardForm";
 
-const CardDisplay = ({ newCard, editCard, id, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews}) => {
+const CardDisplay = ({ newCard, editCard, savedCard, cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, saveAndRefresh}) => {
 
-    if(newCard === true){
+    if(savedCard){
+        return(
+            <div>
+                <h2>Card Saved!</h2>
+            </div>
+        )
+    }else if(newCard === true){
         return (
             <section>
                 <CardHeader
                     title = 'New Card'
-                    dueDate = {new Date()}
+                    dueDate = {'today'}
                     totalViews = {0}
                 />
                 <CardForm
-                    id = ''
+                    cardId = ''
                     deck = {deck}
                     question = ''
                     answer = ''
@@ -20,24 +26,38 @@ const CardDisplay = ({ newCard, editCard, id, createdDate, dueDate, title, creat
                     easinessFactor = {2.5}
                     repetitionInterval = {1}
                     totalViews = {0}
+                    newCard = {true}
+                    saveAndRefresh = {saveAndRefresh}
+                    
+                /> 
+            </section>
+        )
+    }else if(newCard === false){
+        return (
+            <section>
+                <CardHeader
+                    title = {title}
+                    dueDate = {dueDate}
+                    totalViews = {totalViews}
+                />
+                <CardForm
+                    cardId = {cardId}
+                    editCard = {editCard}
+                    deck = {deck}
+                    question = {question}
+                    answer = {answer}
+                    repetitionNumber = {repetitionNumber}
+                    easinessFactor = {easinessFactor}
+                    repetitionInterval = {repetitionInterval}
+                    totalViews = {totalViews}
+                    newCard = {false}
+                    saveAndRefresh = {saveAndRefresh}  
                 /> 
             </section>
         )
     }
 
-
-    // for edit:
-
-    <CardForm
-    id = {id}
-    deck = {deck}
-    question = {question}
-    answer = {answer}
-    repetitionNumber = {repetitionNumber}
-    easinessFactor = {easinessFactor}
-    repetitionInterval = {repetitionInterval}
-    totalViews = {totalViews}
-/> 
+ 
 }
 
 export default CardDisplay;
