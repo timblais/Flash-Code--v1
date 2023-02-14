@@ -8,7 +8,6 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
     const [questionValue, setQuestionValue] = useState();
     const [answerValue, setAnswerValue]  = useState();
     const [activeEdit, setActiveEdit] = useState(editCard)
-    console.log(activeEdit)
 
     useEffect(() => {
         setActiveEdit(false)
@@ -33,19 +32,69 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
             const data = await response.json()
             console.log(data)
             cardSaved()
-            // setEnterNewDeck(false) need to review this to determine how to handle display after submit of new card
-            // deckRefresh()
         }catch(err){
             console.log(err)
         }
     }
 
     const handleEditSubmit = async () => {
-
+        try{
+            const response = await fetch('/card/edit', {
+                method: 'PUT',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    'cardId': cardId,
+                    'question': questionValue,
+                    'answer': answerValue,
+                })
+            })
+            const data = await response.json()
+            console.log(data)
+            cardSaved()
+        }catch(err){
+            console.log(err)
+        }
     }
 
     const handleEditResetSubmit = async () => {
+        try{
+            const response = await fetch('/card/editReset', {
+                method: 'PUT',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    'cardId': cardId,
+                    'question': questionValue,
+                    'answer': answerValue,
+                })
+            })
+            const data = await response.json()
+            console.log(data)
+            cardSaved()
+        }catch(err){
+            console.log(err)
+        }
+    }
 
+    const handleCancelSubmit = async () => {
+
+    }
+
+    const handleDeleteSubmit = async () => {
+        try{
+            const response = await fetch('/card/delete', {
+                method: 'DELETE',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    'deckId': deck,
+                    'cardId': cardId,
+                })
+            })
+            const data = await response.json()
+            console.log(data)
+            cardSaved()
+        }catch(err){
+            console.log(err)
+        }
     }
 
     if(newCard === true){
@@ -63,8 +112,10 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                         <label>
                             Answer
                         </label>
-                        <input name='answer' onChange={(e) => setAnswerValue(e.target.value)}>
-                        </input>
+                        <pre>
+                            <textarea name='answer' onChange={(e) => setAnswerValue(e.target.value)}>
+                            </textarea>
+                        </pre>
                     </div>
                     <Button
                         type = 'button'
@@ -90,9 +141,9 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                         <h3>
                             Answer
                         </h3>
-                        <p>
+                        <pre>
                             {answer}
-                        </p>
+                        </pre>
                     </div>
                     <Button
                         type = 'button'
@@ -110,25 +161,37 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                         <label>
                             Question
                         </label>
-                        <input name='question' value={question} onChange={(e) => setQuestionValue(e.target.value)}>
+                        <input name='question' defaultValue={question} onChange={(e) => setQuestionValue(e.target.value)}>
                         </input>
                     </div>
                     <div className="flex flex-col justify-start items-center">
                         <label>
                             Answer
                         </label>
-                        <input name='answer' value={answer}onChange={(e) => setAnswerValue(e.target.value)}>
-                        </input>
+                        <pre>
+                            <textarea contenteditable='true' name='answer' defaultValue={answer}onChange={(e) => setAnswerValue(e.target.value)}>
+                            </textarea>
+                        </pre>
                     </div>
                     <Button
                         type = 'button'
-                        name = 'Save'
+                        name = 'Cancel'
+                        onClick = {handleCancelSubmit}
+                    />
+                    <Button
+                        type = 'button'
+                        name = 'Save and Keep Stats'
                         onClick = {handleEditSubmit}
                     />
                     <Button
                         type = 'button'
-                        name = 'Save and Reset'
+                        name = 'Save and Reset Card'
                         onClick = {handleEditResetSubmit}
+                    />
+                    <Button
+                        type = 'button'
+                        name = 'Delete Card'
+                        onClick = {handleDeleteSubmit}
                     />
                 </form>
             </section>

@@ -77,6 +77,7 @@ const DeckViewEdit = ({ deckId }) => {
 
     // iterate over array of cards and push preview components to array cards
     for (const card of returnedCards){
+        card['dueDate'] = new Date(card['dueDate']).toLocaleString('en-US')
         cards.push(
             <CardListItem 
                 cardId = {card['_id']}
