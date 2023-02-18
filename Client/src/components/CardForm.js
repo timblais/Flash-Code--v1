@@ -1,6 +1,8 @@
 import Button from "./buttons/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
+import Highlight from "react-highlight";
+import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 
 const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, saveAndRefresh}) => {
 
@@ -9,9 +11,14 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
     const [answerValue, setAnswerValue]  = useState();
     const [activeEdit, setActiveEdit] = useState(editCard)
 
+    console.log(questionValue)
+    console.log(answerValue)
+
     useEffect(() => {
         setActiveEdit(false)
-    }, [cardId])
+        setQuestionValue(question)
+        setAnswerValue(answer)
+    }, [cardId, question, answer])
 
     const cardSaved = () => {
         saveAndRefresh()
@@ -141,9 +148,11 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                         <h3>
                             Answer
                         </h3>
-                        <pre>
-                            {answer}
-                        </pre>
+                        <div>
+                            <Highlight className="javascript">
+                                {answer}
+                            </Highlight>
+                        </div>
                     </div>
                     <Button
                         type = 'button'
@@ -168,10 +177,25 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                         <label>
                             Answer
                         </label>
-                        <pre>
-                            <textarea contenteditable='true' name='answer' defaultValue={answer}onChange={(e) => setAnswerValue(e.target.value)}>
-                            </textarea>
-                        </pre>
+                        {/* this seems to work, next step try combining with highlight js */}
+
+                        <ScrollSync>
+                            <div>
+                                <ScrollSyncPane>
+                                    <div className='w-[500px] h-[150px] overflow-y-auto bg-black' >
+                                        <Highlight className="javascript">
+                                            {answerValue}
+                                        </Highlight>
+                                    </div>
+                                </ScrollSyncPane>
+                                <ScrollSyncPane>
+                                    <pre className='w-[500px] h-[150px] overflow-y-auto overflow-x-hidden'>
+                                        <textarea className='w-[500px] h-[150px] overflow-y-auto overflow-x-hidden' contenteditable='true' name='answer' defaultValue={answerValue} onChange={(e) => setAnswerValue(e.target.value)}>
+                                        </textarea>
+                                    </pre>
+                                </ScrollSyncPane>
+                            </div>
+                        </ScrollSync>
                     </div>
                     <Button
                         type = 'button'

@@ -1,5 +1,6 @@
 import Navigation from '../components/Navigation';
 import Header from '../components/Header';
+import CodeBlock from '../components/CodeBlock';
 
 function Reflect() {
     return (
@@ -11,7 +12,12 @@ function Reflect() {
             title = 'Reflect'
             />
             <section>
-                Reflect Body Here
+                <CodeBlock
+                  string = {
+                    `// testing a comment
+  function() {return something}`
+                  }
+                />
             </section>
         </div>
       </div>
