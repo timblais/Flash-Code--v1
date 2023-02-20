@@ -180,19 +180,24 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                         {/* this seems to work, next step try combining with highlight js */}
 
                         <ScrollSync>
-                            <div>
+                            <div className='w-[500px] h-[200px] overflow-y-auto bg-[#282c34] relative'>
                                 <ScrollSyncPane>
-                                    <div className='w-[500px] h-[150px] overflow-y-auto bg-black' >
+                                    <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
                                         <Highlight className="javascript">
                                             {answerValue}
                                         </Highlight>
-                                    </div>
+                                    </pre>
                                 </ScrollSyncPane>
                                 <ScrollSyncPane>
-                                    <pre className='w-[500px] h-[150px] overflow-y-auto overflow-x-hidden'>
-                                        <textarea className='w-[500px] h-[150px] overflow-y-auto overflow-x-hidden' contenteditable='true' name='answer' defaultValue={answerValue} onChange={(e) => setAnswerValue(e.target.value)}>
-                                        </textarea>
-                                    </pre>
+                                    {/* <pre className='w-[500px] h-[150px] overflow-y-auto overflow-x-hidden'> */}
+                                        <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap absolute top-0 left-0 text-transparent bg-transparent
+                                        caret-gray-200' contenteditable='true' name='answer' defaultValue={answerValue} onInput={(e) => {
+                                        // let inputToJson = JSON.stringify(e.target.innerText)
+                                        // let backToString = JSON.parse(inputToJson)
+                                        setAnswerValue(e.target.innerText)
+                                        }}>{answer}
+                                        </pre>
+                                    {/* </pre> */}
                                 </ScrollSyncPane>
                             </div>
                         </ScrollSync>

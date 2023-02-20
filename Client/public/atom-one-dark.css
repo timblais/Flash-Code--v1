@@ -30,12 +30,14 @@ hue-6-2: #e6c07b
 .hljs-quote {
   color: #5c6370;
   font-style: italic;
+  overflow-wrap: break-word;
 }
 
 .hljs-doctag,
 .hljs-keyword,
 .hljs-formula {
   color: #c678dd;
+  overflow-wrap: break-word;
 }
 
 .hljs-section,
@@ -44,10 +46,12 @@ hue-6-2: #e6c07b
 .hljs-deletion,
 .hljs-subst {
   color: #e06c75;
+  overflow-wrap: break-word;
 }
 
 .hljs-literal {
   color: #56b6c2;
+  overflow-wrap: break-word;
 }
 
 .hljs-string,
@@ -56,11 +60,13 @@ hue-6-2: #e6c07b
 .hljs-attribute,
 .hljs-meta-string {
   color: #98c379;
+  overflow-wrap: break-word;
 }
 
 .hljs-built_in,
 .hljs-class .hljs-title {
   color: #e6c07b;
+  overflow-wrap: break-word;
 }
 
 .hljs-attr,
@@ -72,6 +78,7 @@ hue-6-2: #e6c07b
 .hljs-selector-pseudo,
 .hljs-number {
   color: #d19a66;
+  overflow-wrap: break-word;
 }
 
 .hljs-symbol,
@@ -81,16 +88,20 @@ hue-6-2: #e6c07b
 .hljs-selector-id,
 .hljs-title {
   color: #61aeee;
+  overflow-wrap: break-word;
 }
 
 .hljs-emphasis {
   font-style: italic;
+  overflow-wrap: break-word;
 }
 
 .hljs-strong {
   font-weight: bold;
+  overflow-wrap: break-word;
 }
 
 .hljs-link {
   text-decoration: underline;
+  overflow-wrap: break-word;
 }
