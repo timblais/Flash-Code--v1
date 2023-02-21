@@ -4,6 +4,12 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    backgroundImage: {
+      'landing': "url('../public/landing-splash.jpg')",
+    },
+    fontFamily: {
+      'cutiveMono': ['Cutive Mono', 'monospace'],
+    },
     extend: {
         animation: {
             bounce200: 'bounc 1s infinite 200ms',

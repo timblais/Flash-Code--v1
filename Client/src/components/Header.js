@@ -7,7 +7,7 @@ const Header = ({ title }) => {
                 {title}
             </h1>
             <AuthButton 
-                purpose = 'Log Out'
+                purpose = 'LOG OUT'
             />
             </div>
 

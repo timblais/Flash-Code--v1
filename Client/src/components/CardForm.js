@@ -190,7 +190,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                                 </ScrollSyncPane>
                                 <ScrollSyncPane>
                                     {/* <pre className='w-[500px] h-[150px] overflow-y-auto overflow-x-hidden'> */}
-                                        <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap absolute top-0 left-0 text-transparent bg-transparent
+                                        <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
                                         caret-gray-200' contenteditable='true' name='answer' defaultValue={answerValue} onInput={(e) => {
                                         // let inputToJson = JSON.stringify(e.target.innerText)
                                         // let backToString = JSON.parse(inputToJson)

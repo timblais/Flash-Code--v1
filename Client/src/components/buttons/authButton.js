@@ -34,16 +34,16 @@ const AuthButton = ({ purpose }) => {
   };
 
   let handleClick
-  if(purpose === 'Log In'){
+  if(purpose === 'LOG IN'){
     handleClick = handleLogin
-  }else if(purpose === 'Sign Up'){
+  }else if(purpose === 'SIGN UP'){
     handleClick = handleSignUp
-  }else if(purpose === 'Log Out'){
+  }else if(purpose === 'LOG OUT'){
     handleClick = handleLogout
   }
 
   return (
-    <button className="authButton" onClick={handleClick}>
+    <button className="authButton flex justify-center items-center rounded-full text-white bg-indigo-600 w-32 text-xl font-cutiveMono m-4" onClick={handleClick}>
       {purpose}
     </button>
   );
