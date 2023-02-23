@@ -1,19 +1,19 @@
 import Header from '../components/Header';
 import DecksStudyDash from '../components/DecksStudyDash';
 
-function Study() {
+function Decks() {
   return (
       // Complete view box
       <div className='w-full h-screen flex flex-col justify-start items-start'>
             <Header 
-            currentPage = 'Study'
+            currentPage = 'Decks'
             />
             <section>
-                Study Body Here
+                Decks Body Here
                 <DecksStudyDash />
             </section>
         </div>
     );
   }
   
-  export default Study;
+  export default Decks;

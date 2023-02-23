@@ -1,15 +1,31 @@
-import AuthButton from "./buttons/authButton";
+import Logo from "./Logo";
+import Navigation from "./Navigation";
+import ProfileNav from "./ProfileNav";
 
-const Header = ({ title }) => {    
+const Header = ({ currentPage }) => {    
     return (
-            <div className="flex flex-row justify-between w-full text-2xl py-2 px-4 border-b-4 border-indigo-500 bg-indigo-300">
-            <h1 >
+        <div className="w-full h-16 flex justify-start items-center bg-gray-800 text-gray-300 shadow-md">
+            <Logo />
+            {/* Mobile Navigation */}
+            <div className="w-full h-16 flex justify-end items-center sm:hidden">
+                mobile
+            </div>
+
+            {/* Browser Navigation */}
+            <div className="hidden sm:flex w-full h-16 justify-start items-center">
+                <Navigation 
+                    currentPage={currentPage}
+                />
+                <ProfileNav />
+            </div>
+            
+            {/* <h1 >
                 {title}
             </h1>
             <AuthButton 
                 purpose = 'LOG OUT'
-            />
-            </div>
+            /> */}
+        </div>
 
 
 

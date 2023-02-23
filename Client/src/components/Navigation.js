@@ -1,31 +1,22 @@
 import NavLink from '../components/NavLink'
 
-const Navigation = () => {    
+const Navigation = ({ currentPage }) => {    
     return (
-        <nav className='w-2/12 h-full border-r-4 border-indigo-500 bg-indigo-300 flex flex-col justify-start items-start'>
-            <h1 className="w-full text-2xl my-2 pl-4">
-                Reflect!
-            </h1>
-            
+        <nav className='w-3/5 h-16 flex justify-start items-center'>
             <NavLink 
             text = 'Dashboard'
             link = 'dashboard'
+            currentPage = {currentPage}
             />
             <NavLink 
-            text = 'To Do List'
-            link = 'todo'
-            />
-            <NavLink 
-            text = 'Goals'
-            link = 'goals'
-            />
-            <NavLink 
-            text = 'Reflect'
-            link = 'reflect'
+            text = 'Decks'
+            link = 'decks'
+            currentPage = {currentPage}
             />
             <NavLink 
             text = 'Study'
             link = 'study'
+            currentPage = {currentPage}
             />
         </nav>
   )
