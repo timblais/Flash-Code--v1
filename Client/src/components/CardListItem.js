@@ -1,4 +1,4 @@
-import Button from './buttons/Button'
+import CardButton from './buttons/cardButton'
 
 const CardListItem = ({ cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, displayThisCard }) => {    
     
@@ -8,7 +8,7 @@ const CardListItem = ({ cardId, createdDate, dueDate, title, createdBy, deck, qu
 
     return (
        <div>
-            <Button 
+            <CardButton 
                 type = 'button'
                 onClick={handleClick}
                 name = {title}

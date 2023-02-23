@@ -1,5 +1,7 @@
 import Header from '../components/Header';
+import SubHeader from '../components/SubHeader';
 import DecksStudyDash from '../components/DecksStudyDash';
+import Footer from '../components/Footer';
 
 function Decks() {
   return (
@@ -8,10 +10,14 @@ function Decks() {
             <Header 
             currentPage = 'Decks'
             />
-            <section>
+            <SubHeader
+            title={'My Decks'}
+            />
+            <section className='h-4/5'>
                 Decks Body Here
                 <DecksStudyDash />
             </section>
+            <Footer />
         </div>
     );
   }

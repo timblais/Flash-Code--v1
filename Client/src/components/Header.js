@@ -4,7 +4,7 @@ import ProfileNav from "./ProfileNav";
 
 const Header = ({ currentPage }) => {    
     return (
-        <div className="w-full h-16 flex justify-start items-center bg-gray-800 text-gray-300 shadow-md">
+        <div className="w-full h-7.5% flex justify-start items-center bg-gray-800 text-gray-300 shadow-md">
             <Logo />
             {/* Mobile Navigation */}
             <div className="w-full h-16 flex justify-end items-center sm:hidden">

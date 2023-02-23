@@ -5,7 +5,7 @@ const NavLink = ({ currentPage, text, link }) => {
     
     if(currentPage === text){
       return (
-        <span className="flex justify-center items-center text-xl mx-3 p-2 rounded-lg bg-gray-900 text-white">
+        <span className="flex justify-center items-center text-xl mx-3 px-2 py-1 rounded-lg bg-gray-900 text-white">
           <Link to={url}>
             {text}
           </Link>
@@ -13,7 +13,7 @@ const NavLink = ({ currentPage, text, link }) => {
       )
     }else{
       return (
-        <span className="flex justify-center items-center text-xl mx-3 p-2 rounded-lg hover:bg-gray-600 hover:text-white">
+        <span className="flex justify-center items-center text-xl mx-3 px-2 py-1 rounded-lg hover:bg-gray-600 hover:text-white">
           <Link to={url}>
             {text}
           </Link>

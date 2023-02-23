@@ -14,6 +14,10 @@ module.exports = {
         animation: {
             bounce200: 'bounc 1s infinite 200ms',
             bounce400: 'bounc 1s infinite 400ms',
+        },
+        height: {
+          '1/20': '5%',
+          '7.5%': '7.5%',
         }
     },
   },

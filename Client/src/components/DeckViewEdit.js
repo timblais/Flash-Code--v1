@@ -99,17 +99,21 @@ const DeckViewEdit = ({ deckId }) => {
     }
 
     return (
-        <section className="w-full flex flex-row justify-between items-start">
-             <section className='px-8'>
-                <h1>
-                    {returnedDeck['title']}
-                </h1>
-                <Button
-                    type = 'button'
-                    name = 'New Card'
-                    onClick = {createNewCard}
-                />
-                {cards}
+        <section className="w-full h-full flex flex-row justify-start items-start">
+             <section className='w-52 h-full px-8 flex-none'>
+                <div className='w-full h-full flex flex-col justify-start items-start'>
+                    <h1 className='w-full h-16 flex justify-start items-center text-2xl'>
+                        {returnedDeck['title']}
+                    </h1>
+                    <Button
+                        type = 'button'
+                        name = 'New Card'
+                        onClick = {createNewCard}
+                    />
+                    <div className='w-full h-full flex flex-col justify-start items-start my-3 py-3 overflow-auto'>
+                        {cards}
+                    </div>
+                </div>
              </section>
              <section className='px-8'>
                 <CardDisplay 
