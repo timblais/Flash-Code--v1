@@ -1,9 +1,14 @@
 import CardButton from './buttons/cardButton'
 
-const CardListItem = ({ cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, displayThisCard }) => {    
+const CardListItem = ({ cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, displayThisCard, selected }) => {    
     
     const handleClick = () => {
         displayThisCard(cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews)
+    }
+
+    let thisCard
+    if(cardId === selected){
+        thisCard = true;
     }
 
     return (
@@ -12,6 +17,7 @@ const CardListItem = ({ cardId, createdDate, dueDate, title, createdBy, deck, qu
                 type = 'button'
                 onClick={handleClick}
                 name = {title}
+                selected = {thisCard}
             />
        </div> 
   )

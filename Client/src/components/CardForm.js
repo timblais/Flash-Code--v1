@@ -83,7 +83,9 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
     }
 
     const handleCancelSubmit = async () => {
-
+        setActiveEdit(false)
+        setQuestionValue(question)
+        setAnswerValue(answer)
     }
 
     const handleDeleteSubmit = async () => {
@@ -108,25 +110,9 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
         return(
             <section>
                 <form className="flex flex-col justify-start items-center">
-                    {/* <div className="flex flex-col justify-start items-center">
-                        <label>
-                            Question
-                        </label>
-                        <input name='question' onChange={(e) => setQuestionValue(e.target.value)}>
-                        </input>
-                    </div>
-                    <div className="flex flex-col justify-start items-center">
-                        <label>
-                            Answer
-                        </label>
-                        <pre>
-                            <textarea name='answer' onChange={(e) => setAnswerValue(e.target.value)}>
-                            </textarea>
-                        </pre>
-                    </div> */}
-                                        <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
+                    <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
                         <div className="flex flex-col justify-start items-start py-1 px-4">
-                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                            <label className="w-full bg-gray-300 px-2 rounded-t-md">
                                 Question
                             </label>
                             <ScrollSync>
@@ -149,7 +135,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                             </ScrollSync>
                         </div>
                         <div className="flex flex-col justify-start items-start p-1">
-                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                            <label className="w-full bg-gray-300 px-2 rounded-t-md">
                                 Answer
                             </label>
                             <ScrollSync>
@@ -187,7 +173,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                 <div className="w-full flex flex-col justify-start items-center">
                     <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
                         <div className="flex flex-col justify-start items-start py-1 px-4">
-                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                            <label className="w-full bg-gray-300 px-2 rounded-t-md">
                                 Question
                             </label>
                             <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
@@ -199,7 +185,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                             </div>
                         </div>
                         <div className="flex flex-col justify-start items-start p-1">
-                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                            <label className="w-full bg-gray-300 px-2 rounded-t-md">
                                 Answer
                             </label>
                             <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
@@ -226,7 +212,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                 <form className="w-full flex flex-col justify-start items-center">
                     <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
                         <div className="flex flex-col justify-start items-start py-1 px-4">
-                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                            <label className="w-full bg-gray-300 px-2 rounded-t-md">
                                 Question
                             </label>
                             <ScrollSync>
@@ -249,7 +235,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                             </ScrollSync>
                         </div>
                         <div className="flex flex-col justify-start items-start p-1">
-                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                            <label className="w-full bg-gray-300 px-2 rounded-t-md">
                                 Answer
                             </label>
                             <ScrollSync>

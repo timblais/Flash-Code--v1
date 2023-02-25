@@ -9,7 +9,8 @@ const DeckViewEdit = ({ deckId }) => {
     const [returnedDeck, setReturnedDeck] = useState({});
     const [returnedCards, setReturnedCards] = useState([]);
     const [fetchDetails, setFetchDetails] = useState(0);
-    const [cardDisplay, setCardDisplay] = useState({})
+    const [cardDisplay, setCardDisplay] = useState({});
+    const [selectedCard, setSelectedCard] = useState();
     const cards = []
     console.log(deckId)
 
@@ -32,9 +33,12 @@ const DeckViewEdit = ({ deckId }) => {
             repetitionInterval: repetitionInterval, 
             totalViews: totalViews, 
         })
+        setSelectedCard(cardId)
+        console.log(cardId)
     }
 
     function createNewCard(){
+        setSelectedCard('')
         setCardDisplay({
             newCard: true,
             deck: deckId,
@@ -80,6 +84,7 @@ const DeckViewEdit = ({ deckId }) => {
         card['dueDate'] = new Date(card['dueDate']).toLocaleString('en-US')
         cards.push(
             <CardListItem 
+                key = {card['_id']}
                 cardId = {card['_id']}
                 createdDate =  {card['createdDate']}
                 dueDate = {card['dueDate']}
@@ -93,6 +98,7 @@ const DeckViewEdit = ({ deckId }) => {
                 repetitionInterval = {card['repetitionInterval']}
                 totalViews = {card['totalViews']}
                 displayThisCard = {showClickedCard}
+                selected = {selectedCard}
 
             />
         )
