@@ -108,7 +108,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
         return(
             <section>
                 <form className="flex flex-col justify-start items-center">
-                    <div className="flex flex-col justify-start items-center">
+                    {/* <div className="flex flex-col justify-start items-center">
                         <label>
                             Question
                         </label>
@@ -123,11 +123,60 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                             <textarea name='answer' onChange={(e) => setAnswerValue(e.target.value)}>
                             </textarea>
                         </pre>
+                    </div> */}
+                                        <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
+                        <div className="flex flex-col justify-start items-start py-1 px-4">
+                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                                Question
+                            </label>
+                            <ScrollSync>
+                                <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                                    <ScrollSyncPane>
+                                        <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
+                                            <Highlight className="javascript">
+                                                {questionValue}
+                                            </Highlight>
+                                        </pre>
+                                    </ScrollSyncPane>
+                                    <ScrollSyncPane>
+                                            <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
+                                            caret-gray-200' contenteditable='true' name='answer' defaultValue='' onInput={(e) => {
+                                            setQuestionValue(e.target.innerText)
+                                            }}>
+                                            </pre>
+                                    </ScrollSyncPane>
+                                </div>
+                            </ScrollSync>
+                        </div>
+                        <div className="flex flex-col justify-start items-start p-1">
+                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                                Answer
+                            </label>
+                            <ScrollSync>
+                                <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                                    <ScrollSyncPane>
+                                        <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
+                                            <Highlight className="javascript">
+                                                {answerValue}
+                                            </Highlight>
+                                        </pre>
+                                    </ScrollSyncPane>
+                                    <ScrollSyncPane>
+                                            <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
+                                            caret-gray-200' contenteditable='true' name='answer' defaultValue='' onInput={(e) => {
+                                            setAnswerValue(e.target.innerText)
+                                            }}>
+                                            </pre>
+                                    </ScrollSyncPane>
+                                </div>
+                            </ScrollSync>
+                        </div>
                     </div>
                     <Button
                         type = 'button'
                         name = 'Save'
                         onClick = {handleNewSubmit}
+                        width = 'w-28'
                     />
                 </form>
             </section>
@@ -135,93 +184,121 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
     }else if(activeEdit === false){
         return(
             <section>
-                <div className="flex flex-col justify-start items-center">
-                    <div className="flex flex-col justify-start items-center">
-                        <h3>
-                            Question
-                        </h3>
-                        <p>
-                            {question}
-                        </p>
-                    </div>
-                    <div className="flex flex-col justify-start items-center">
-                        <h3>
-                            Answer
-                        </h3>
-                        <div>
-                            <Highlight className="javascript">
-                                {answer}
-                            </Highlight>
+                <div className="w-full flex flex-col justify-start items-center">
+                    <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
+                        <div className="flex flex-col justify-start items-start py-1 px-4">
+                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                                Question
+                            </label>
+                            <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                                <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
+                                    <Highlight className="javascript">
+                                        {questionValue}
+                                    </Highlight>
+                                </pre>
+                            </div>
+                        </div>
+                        <div className="flex flex-col justify-start items-start p-1">
+                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                                Answer
+                            </label>
+                            <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                                <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
+                                    <Highlight className="javascript">
+                                        {answerValue}
+                                    </Highlight>
+                                </pre>
+                            </div>
                         </div>
                     </div>
                     <Button
                         type = 'button'
                         name = 'Edit'
                         onClick = {() => setActiveEdit(true)}
+                        width = 'w-28'
                     />
                 </div>
             </section>
         )
     }else if(activeEdit === true){
         return(
-            <section>
-                <form className="flex flex-col justify-start items-center">
-                    <div className="flex flex-col justify-start items-center">
-                        <label>
-                            Question
-                        </label>
-                        <input name='question' defaultValue={question} onChange={(e) => setQuestionValue(e.target.value)}>
-                        </input>
-                    </div>
-                    <div className="flex flex-col justify-start items-center">
-                        <label>
-                            Answer
-                        </label>
-                        {/* this seems to work, next step try combining with highlight js */}
-
-                        <ScrollSync>
-                            <div className='w-[500px] h-[200px] overflow-y-auto bg-[#282c34] relative'>
-                                <ScrollSyncPane>
-                                    <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
-                                        <Highlight className="javascript">
-                                            {answerValue}
-                                        </Highlight>
-                                    </pre>
-                                </ScrollSyncPane>
-                                <ScrollSyncPane>
-                                    {/* <pre className='w-[500px] h-[150px] overflow-y-auto overflow-x-hidden'> */}
-                                        <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
-                                        caret-gray-200' contenteditable='true' name='answer' defaultValue={answerValue} onInput={(e) => {
-                                        // let inputToJson = JSON.stringify(e.target.innerText)
-                                        // let backToString = JSON.parse(inputToJson)
-                                        setAnswerValue(e.target.innerText)
-                                        }}>{answer}
+            <section className="w-full">
+                <form className="w-full flex flex-col justify-start items-center">
+                    <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
+                        <div className="flex flex-col justify-start items-start py-1 px-4">
+                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                                Question
+                            </label>
+                            <ScrollSync>
+                                <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                                    <ScrollSyncPane>
+                                        <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
+                                            <Highlight className="javascript">
+                                                {questionValue}
+                                            </Highlight>
                                         </pre>
-                                    {/* </pre> */}
-                                </ScrollSyncPane>
-                            </div>
-                        </ScrollSync>
+                                    </ScrollSyncPane>
+                                    <ScrollSyncPane>
+                                            <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
+                                            caret-gray-200' contenteditable='true' name='answer' defaultValue={questionValue} onInput={(e) => {
+                                            setQuestionValue(e.target.innerText)
+                                            }}>{question}
+                                            </pre>
+                                    </ScrollSyncPane>
+                                </div>
+                            </ScrollSync>
+                        </div>
+                        <div className="flex flex-col justify-start items-start p-1">
+                            <label className="w-full bg-gray-300 px-1 rounded-t-md">
+                                Answer
+                            </label>
+                            <ScrollSync>
+                                <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                                    <ScrollSyncPane>
+                                        <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
+                                            <Highlight className="javascript">
+                                                {answerValue}
+                                            </Highlight>
+                                        </pre>
+                                    </ScrollSyncPane>
+                                    <ScrollSyncPane>
+                                            <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
+                                            caret-gray-200' contenteditable='true' name='answer' defaultValue={answerValue} onInput={(e) => {
+                                            setAnswerValue(e.target.innerText)
+                                            }}>{answer}
+                                            </pre>
+                                    </ScrollSyncPane>
+                                </div>
+                            </ScrollSync>
+                        </div>
                     </div>
-                    <Button
-                        type = 'button'
-                        name = 'Cancel'
-                        onClick = {handleCancelSubmit}
-                    />
-                    <Button
-                        type = 'button'
-                        name = 'Save and Keep Stats'
-                        onClick = {handleEditSubmit}
-                    />
-                    <Button
-                        type = 'button'
-                        name = 'Save and Reset Card'
-                        onClick = {handleEditResetSubmit}
-                    />
-                    <Button
-                        type = 'button'
-                        name = 'Delete Card'
-                        onClick = {handleDeleteSubmit}
-                    />
+                    <div className="flex justify-center items-center">
+                        <Button
+                            type = 'button'
+                            name = 'Cancel'
+                            onClick = {handleCancelSubmit}
+                            width = 'w-28'
+                        />
+                        <Button
+                            type = 'button'
+                            name = 'Save/Keep Stats'
+                            onClick = {handleEditSubmit}
+                            width = 'w-32'
+                        />
+                        <Button
+                            type = 'button'
+                            name = 'Save/Reset Card'
+                            onClick = {handleEditResetSubmit}
+                            width = 'w-32'
+                        />
+                        <Button
+                            type = 'button'
+                            name = 'Delete Card'
+                            onClick = {handleDeleteSubmit}
+                            width = 'w-28'
+                        />
+                    </div>
+
                 </form>
             </section>
         )

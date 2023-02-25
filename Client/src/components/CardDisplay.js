@@ -11,7 +11,7 @@ const CardDisplay = ({ newCard, editCard, savedCard, cardId, createdDate, dueDat
         )
     }else if(newCard === true){
         return (
-            <section>
+            <section className="w-full h-full flex flex-col justify-start items-center">
                 <CardHeader
                     title = 'New Card'
                     dueDate = {'today'}
@@ -34,7 +34,7 @@ const CardDisplay = ({ newCard, editCard, savedCard, cardId, createdDate, dueDat
         )
     }else if(newCard === false){
         return (
-            <section>
+            <section className="w-full h-full flex flex-col justify-start items-center">
                 <CardHeader
                     title = {title}
                     dueDate = {dueDate}

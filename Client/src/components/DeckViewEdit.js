@@ -109,13 +109,14 @@ const DeckViewEdit = ({ deckId }) => {
                         type = 'button'
                         name = 'New Card'
                         onClick = {createNewCard}
+                        width = 'w-28'
                     />
                     <div className='w-full h-full flex flex-col justify-start items-start my-3 py-3 overflow-auto'>
                         {cards}
                     </div>
                 </div>
              </section>
-             <section className='px-8'>
+             <section className='w-full h-full flex flex-col justify-start items-center px-4'>
                 <CardDisplay 
                     newCard = {cardDisplay.newCard}
                     editCard = {cardDisplay.editCard}
