@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import DeckPreview from './DeckPreview';
 import NewDeck from './NewDeck'
-// import DeckPreview from './DeckPreview'
 
-const DecksStudyDash = () => {    
+const DecksViewDash = () => {    
     
     const { user, getAccessTokenSilently } = useAuth0();
     const [returnedDecks, setReturnedDecks] = useState([]);
@@ -53,9 +52,6 @@ const DecksStudyDash = () => {
     
     return (
        <section>
-            <h1>
-                My Decks
-            </h1>
             <NewDeck 
             deckRefresh = {refreshDecks}/>
             {decks}
@@ -63,4 +59,4 @@ const DecksStudyDash = () => {
   )
 }
 
-export default DecksStudyDash;
+export default DecksViewDash;

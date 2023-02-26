@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Root from './routes/root';
 import Dashboard from './routes/dashboard'
 import Study from './routes/study';
+import StudyCards from "./routes/studyCards";
 import Decks from './routes/decks'
 import DeckView from './routes/deckView';
 import Loading from './components/Loading'
@@ -26,6 +27,7 @@ function App() {
       <Route path='/' element={<Root />} />
       <Route path='/dashboard' element={<AuthCheck component={Dashboard} />} />
       <Route path='/study' element={<AuthCheck component={Study} />} />
+      <Route path='/study/studying/:deckId' element={<AuthCheck component={StudyCards} />} />
       <Route path='/decks' element={<AuthCheck component={Decks} />} />
       <Route path='/decks/view/:deckId' element={<AuthCheck component={DeckView} />} />
     </Routes>

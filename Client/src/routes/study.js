@@ -1,5 +1,7 @@
 import Header from '../components/Header';
-import DecksStudyDash from '../components/DecksStudyDash';
+import SubHeader from '../components/SubHeader';
+import StudyDash from '../components/StudyDash';
+import Footer from '../components/Footer';
 
 function Study() {
   return (
@@ -8,10 +10,13 @@ function Study() {
             <Header 
             currentPage = 'Study'
             />
-            <section>
-                Study Body Here
-                <DecksStudyDash />
+            <SubHeader
+            title={'Study'}
+            />
+            <section className='h-4/5'>
+                <StudyDash />
             </section>
+            <Footer />
         </div>
     );
   }
