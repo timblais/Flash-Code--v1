@@ -30,7 +30,6 @@ const StudyDash = () => {
                 const data = await response.json()
                 // create an array of returned deck objects
                 setReturnedDecksWithCards(data['decksAndCards'])
-                console.log((data['decksAndCards']))
             } catch (error) {
                 console.log(error)
             }
@@ -40,9 +39,7 @@ const StudyDash = () => {
     }, [user, getAccessTokenSilently,])
 
     // iterate over array of decks and push preview components to array decks
-    for (const deck in returnedDecksWithCards){
-        console.log(returnedDecksWithCards[deck][1])
-        
+    for (const deck in returnedDecksWithCards){ 
         decksAndCards.push(
             <StudyPreview 
                 deckId = {returnedDecksWithCards[deck][0]['_id']}

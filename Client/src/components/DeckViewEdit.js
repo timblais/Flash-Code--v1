@@ -54,7 +54,7 @@ const DeckViewEdit = ({ deckId }) => {
         })
     }
 
-    // fetch decks from db
+    // fetch deck and cards from db
     useEffect(() => {
         const getDeckDetails = async (user, deckId) => {
             try {
