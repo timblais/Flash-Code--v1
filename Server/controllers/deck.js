@@ -26,6 +26,31 @@ module.exports = {
       }
     },
 
+    getUserDecksWithCardsDue: async (req, res) => {
+      const user = req.params.userId
+      try {
+        const decks = await Deck.find({ createdBy: user});
+        const cards = await Card.find({ createdBy: user});
+
+        let decksAndCards = {}
+        for (const deck of decks){
+          decksAndCards[deck['_id']] = []
+          decksAndCards[deck['_id']][0] = deck
+          decksAndCards[deck['_id']][1] = []
+        }
+
+        for (const card of cards){
+          if(decksAndCards[card['deck']]){
+            decksAndCards[card['deck']][1].push(card)
+          }
+        }
+        
+        res.json({decksAndCards: decksAndCards})
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
     getDeckandCards: async (req, res) => {
       const user = req.params.userId
       const deck = req.params.deckId
