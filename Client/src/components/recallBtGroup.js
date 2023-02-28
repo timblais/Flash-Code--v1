@@ -4,7 +4,7 @@ const RecallBtGroup = ({ display, onclick }) => {
     return(
         <section className={`${display || 'flex'} w-full justify-center items-center`}>
             <RecallButton
-                key={0}
+                weight={0}
                 type={'button'}
                 onClick={onclick}
                 name={'Zero'}
@@ -13,7 +13,7 @@ const RecallBtGroup = ({ display, onclick }) => {
                 width={'w-28'}
             />
             <RecallButton
-                key={1}
+                weight={1}
                 type={'button'}
                 onClick={onclick}
                 name={'Bad'}
@@ -22,7 +22,7 @@ const RecallBtGroup = ({ display, onclick }) => {
                 width={'w-28'}
             />
             <RecallButton
-                key={2}
+                weight={2}
                 type={'button'}
                 onClick={onclick}
                 name={'Almost'}
@@ -31,7 +31,7 @@ const RecallBtGroup = ({ display, onclick }) => {
                 width={'w-28'}
             />
             <RecallButton
-                key={3}
+                weight={3}
                 type={'button'}
                 onClick={onclick}
                 name={'Okay'}
@@ -40,7 +40,7 @@ const RecallBtGroup = ({ display, onclick }) => {
                 width={'w-28'}
             />
             <RecallButton
-                key={4}
+                weight={4}
                 type={'button'}
                 onClick={onclick}
                 name={'Good'}
@@ -49,7 +49,7 @@ const RecallBtGroup = ({ display, onclick }) => {
                 width={'w-28'}
             />
             <RecallButton
-                key={5}
+                weight={5}
                 type={'button'}
                 onClick={onclick}
                 name={'Perfect'}
