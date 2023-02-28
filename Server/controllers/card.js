@@ -64,6 +64,19 @@ deleteCard: async (req, res) => {
   }
 },
 
-
+updateCardRating: async (req, res) => {
+  try {
+      const card = await Card.findOneAndUpdate({_id: req.body.cardId}, {
+            dueDate: req.body.dueDate,
+            repetitionNumber: req.body.repetitionNumber,
+            easinessFactor: req.body.easinessFactor,
+            repetitionInterval: req.body.repetitionInterval,
+            totalViews: req.body.totalViews,
+      }, {new: true});
+      res.json('Card Ratings Updated')
+  } catch (err) {
+    console.log(err);
+  }
+},
 
 }
