@@ -13,11 +13,13 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
     const [ userAnswer, setUserAnswer] = useState('');
 
     let card = cardArray[0]
+    let remainingCards = [...cardArray]
 
     useEffect(() => {
         setShowAnswer('hidden')
         setShowAnswerButton('flex')
         setShowRatingButtons('hidden')
+        setUserAnswer('')
     }, [cardArray])
 
     const showAnswerRatings = () => {
@@ -99,6 +101,14 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
         await updateCard(n, I, EF, nextDue)
         await updateCardInDB()
 
+        let tomorrow = new Date()
+        tomorrow.setHours(24,0,0,0)
+        remainingCards.shift()
+        if(nextDue < tomorrow){
+            remainingCards.push(card)
+        }
+        updateCardArray(remainingCards)
+
     }
 
     return(
@@ -136,7 +146,7 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
                                 </ScrollSyncPane>
                                 <ScrollSyncPane>
                                         <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
-                                        caret-gray-200' contenteditable='true' name='answer' defaultValue='' onInput={(e) => {
+                                        caret-gray-200' contenteditable='true' name='answer' defaultValue={userAnswer} onInput={(e) => {
                                         setUserAnswer(e.target.innerText)
                                         }}>
                                         </pre>
