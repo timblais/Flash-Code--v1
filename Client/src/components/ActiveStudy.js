@@ -25,10 +25,10 @@ const ActiveStudy = ({ deckId }) => {
                 const data = await response.json()
                 // set deck info and array of cards to be studied during this session
                 let todaysCards = await data['cards'].filter(card => {
-                    let tomorrow = new Date()
-                    tomorrow.setHours(24,0,0,0)
-                    let date = Date.parse(card['dueDate'])
-                    return date <= tomorrow  
+                    let today = new Date()
+                    // tomorrow.setHours(24,0,0,0)
+                    let date = new Date(card['dueDate'])
+                    return date <= today  
                 })
                 await todaysCards.sort((a,b) => Date.parse(a['dueDate']) - Date.parse(b['dueDate']))
                 setReturnedDeck(data['deck'])

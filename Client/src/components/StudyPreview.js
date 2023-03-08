@@ -10,13 +10,9 @@ const StudyPreview = ({ deckId, deckName, totalCards, cardArray}) => {
             newCards++
         }
     }
-    let forReview = 0
-    for (const card of cardArray){
-        let date = Date.parse(card['dueDate'])
-        if(date <= new Date()){
-            forReview++
-        }
-    }
+    let forReview = cardArray.length
+    let studying = cardArray.length - newCards
+
 
     return (
        <div>
@@ -32,10 +28,10 @@ const StudyPreview = ({ deckId, deckName, totalCards, cardArray}) => {
                 {newCards} New
             </span>
             <span className="w-full text-l my-2 pl-4">
-                {forReview} For Review
+                {studying} Studying
             </span>
             <span className="w-full text-l my-2 pl-4">
-                {totalCards} Total Cards
+                {`${forReview}/${totalCards} Cards For Review`}
             </span>
             <span className="w-full text-l my-2 pl-4">
                 <Link to={urlView}>
