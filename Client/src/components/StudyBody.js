@@ -4,29 +4,23 @@ import Highlight from "react-highlight";
 import Button from "./buttons/Button";
 import RecallBtGroup from './recallBtGroup';
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
+import StudyCardTabHeader from "./StudyCardTabHeader";
 
 const StudyBody = ({ cardArray, updateCardArray}) => {
     const { user, getAccessTokenSilently } = useAuth0();
-    const [ showAnswer, setShowAnswer ] = useState('hidden');
-    const [ showAnswerButton, setShowAnswerButton ] = useState('flex');
+    const [ tabDisplay, setTabDisplay ] = useState('Question')
     const [ showRatingButtons, setShowRatingButtons ] = useState('hidden');
     const [ userAnswer, setUserAnswer] = useState('');
+    const [ userAnswerOverlay, setUserAnswerOverlay ]= useState('');
 
     let card = cardArray[0]
     let remainingCards = [...cardArray]
 
     useEffect(() => {
-        setShowAnswer('hidden')
-        setShowAnswerButton('flex')
-        setShowRatingButtons('hidden')
+        setTabDisplay('Question')
         setUserAnswer('')
+        setShowRatingButtons('hidden')
     }, [cardArray])
-
-    const showAnswerRatings = () => {
-        setShowAnswer('flex')
-        setShowAnswerButton('hidden')
-        setShowRatingButtons('flex')
-    }
 
     const updateCard = async (n, I, EF, nextDue) => {
         card['dueDate'] = new Date(nextDue)
@@ -111,32 +105,62 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
 
     }
 
-    return(
-        <section className="w-full h-9/10 flex flex-col justify-start items-center">
-            <div className="w-full h-9/10 flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-center">
-                {/* Question */}
-                <div className="xl:w-5/12 xl:h-95% xl:border-2 xl:m-2 flex flex-col justify-start items-center">
-                    {/* <div className="flex flex-col justify-start items-start py-1 px-4"> */}
-                        <label className="w-full p-1 rounded-t-md flex justify-center items-center text-lg">
-                            Question
-                        </label>
-                        <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+    const displayQuestion = () => {
+        setTabDisplay('Question')
+    }
+
+    const displayUserAnswer = () => {
+        setTabDisplay('Enter Answer')
+        setUserAnswerOverlay(userAnswer)
+    }
+
+    const displayAnswer = () => {
+        setTabDisplay('Show Answer')
+        setShowRatingButtons('flex')
+    }
+
+    if(tabDisplay === 'Question'){
+        return(
+            <section className="w-full h-9/10 flex flex-col justify-start items-center">
+                <div className="w-full h-9/10 flex flex-col justify-start items-center">
+                    {/* Question */}
+                    <StudyCardTabHeader 
+                         display={tabDisplay}
+                         showQuestion={displayQuestion}
+                         showAnswer={displayAnswer}
+                         enterAnswer={displayUserAnswer}               
+                    />
+                    <div className="sm:w-[625px] sm:h-95% sm:border-4 sm:border-gray-800 sm:mx-2 flex flex-col justify-start items-center">
+                        <div className='sm:w-[600px] h-[400px] m-2 overflow-y-auto bg-[#282c34] relative'>
                             <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
                                 <Highlight className="javascript">
                                     {card.question}
                                 </Highlight>
                             </pre>
-                        {/* </div> */}
+                        </div>
                     </div>
                 </div>
-                {/* Answer */}
-                <div className="xl:w-5/12 xl:h-95% xl:border-2 xl:m-2 flex flex-col justify-start items-center">
-                    {/* User Answer */}
-                        <label className="w-full p-1 rounded-t-md flex justify-center items-center text-lg">
-                            Enter Answer
-                        </label>
+                        
+                <RecallBtGroup
+                    display={showRatingButtons}
+                    onclick={rateCard}
+                />
+            </section>
+        )
+    }else if(tabDisplay === 'Enter Answer'){
+        return(
+            <section className="w-full h-9/10 flex flex-col justify-start items-center">
+                <div className="w-full h-9/10 flex flex-col justify-start items-center">
+                    {/* Enter Answer */}
+                    <StudyCardTabHeader 
+                         display={tabDisplay}
+                         showQuestion={displayQuestion}
+                         showAnswer={displayAnswer}
+                         enterAnswer={displayUserAnswer}               
+                    />
+                    <div className="sm:w-[625px] sm:h-95% sm:border-4 sm:border-gray-800 sm:mx-2 flex flex-col justify-start items-center">
                         <ScrollSync>
-                            <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                            <div className='w-[600px] h-[400px] m-2 overflow-y-auto bg-[#282c34] relative'>
                                 <ScrollSyncPane>
                                     <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
                                         <Highlight className="javascript">
@@ -145,20 +169,36 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
                                     </pre>
                                 </ScrollSyncPane>
                                 <ScrollSyncPane>
-                                        <pre className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
+                                        <pre id='typing' className='w-full h-full overflow-y-auto overflow-x-hidden p-2 font-mono whitespace-pre-wrap break-words absolute top-0 left-0 text-transparent bg-transparent
                                         caret-gray-200' contenteditable='true' name='answer' defaultValue={userAnswer} onInput={(e) => {
                                         setUserAnswer(e.target.innerText)
-                                        }}>
+                                        }}>{userAnswerOverlay}
                                         </pre>
                                 </ScrollSyncPane>
                             </div>
                         </ScrollSync>
-                    {/* Card Answer */}
-                    <div className={`${showAnswer} flex-col justify-start items-start p-1`}>
-                        <label className="w-full p-1 rounded-t-md flex justify-center items-center text-lg">
-                            Correct Answer
-                        </label>
-                        <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
+                    </div>
+                </div>
+                        
+                <RecallBtGroup
+                    display={showRatingButtons}
+                    onclick={rateCard}
+                />
+            </section>
+        )
+    }else if(tabDisplay === 'Show Answer'){
+        return(
+            <section className="w-full h-9/10 flex flex-col justify-start items-center">
+                <div className="w-full h-9/10 flex flex-col justify-start items-center">
+                    {/* Show Answer */}
+                    <StudyCardTabHeader 
+                         display={tabDisplay}
+                         showQuestion={displayQuestion}
+                         showAnswer={displayAnswer}
+                         enterAnswer={displayUserAnswer}               
+                    />
+                    <div className="sm:w-[625px] sm:h-95% sm:border-4 sm:border-gray-800 sm:mx-2 flex flex-col justify-start items-center">
+                        <div className='w-[600px] h-[400px] m-2 overflow-y-auto bg-[#282c34] relative'>
                             <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
                                 <Highlight className="javascript">
                                     {card.answer}
@@ -167,21 +207,15 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
                         </div>
                     </div>
                 </div>
-            </div>
-                    
-                <Button
-                    type = 'button'
-                    name = 'Show Answer'
-                    onClick= {showAnswerRatings}
-                    width = 'w-28'
-                    display = {showAnswerButton}
-                />
+                        
                 <RecallBtGroup
                     display={showRatingButtons}
                     onclick={rateCard}
                 />
-        </section>
-    )
+            </section>
+        )
+    }
+
 };
 
 export default StudyBody;
