@@ -41,7 +41,10 @@ module.exports = {
 
         for (const card of cards){
           if(decksAndCards[card['deck']]){
-            decksAndCards[card['deck']][1].push(card)
+            let date = Date.parse(card['dueDate'])
+            if(date <= new Date()){
+              decksAndCards[card['deck']][1].push(card)
+            }
           }
         }
         
