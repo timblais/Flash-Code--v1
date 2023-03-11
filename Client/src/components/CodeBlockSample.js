@@ -1,7 +1,46 @@
 import Highlight from 'react-highlight';
+import { useEffect, useState} from 'react';
+import { getAccessTokenSilently } from '@auth0/auth0-react';
 
 const CodeBlockSample = ({ language,  }) => {
-    
+  
+  const [languageSamples, setLanguageSamples] = useState([])
+  const [sampleValue, setSampleValue] = useState('')
+  
+  useEffect(() => {
+    const getLangSamples = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently()
+        const response = await fetch(`/languages/samples`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+            },
+        })
+        const data = await response.json()
+        // create an array of returned language sample objects
+        setLanguageSamples(data['decks'])
+      } catch (error) {
+          console.log(error)
+      }
+    }
+
+    getLangSamples()    
+}, [])
+
+    useEffect(() => {
+      for(const lang in languageSamples){
+        if(lang.languageName === language){
+          setSampleValue(lang.sample)
+        }
+      }
+    }, [language, languageSamples])
+
+    // Next steps: build out examples in database. Create relevant server side functions to grab samples. Update below code to use sampleValue.
+
+
+
     let string = ''
     const langs = {
         javascript: `function $initHighlight(block, cls) {
