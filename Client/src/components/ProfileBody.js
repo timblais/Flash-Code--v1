@@ -1,36 +1,39 @@
 import { useEffect, useState } from "react";
 import CodeBlockSample from "./CodeBlockSample";
-import provideCSSPath from './themePaths'
+import { Helmet } from "react-helmet-async";
+import { languages, themes } from "./utils/languagesAndThemes";
 
 const ProfileBody = ({ }) => {
     const [preferenceEdit, setPreferenceEdit] = useState('false')
     const [defaultLanguage, setDefaultLanguage] = useState('javascript')
-    const [defaultTheme, setDefaultTheme] = useState()
-    const [cssPath, setCSSPath] = useState()
-    // next step: buld out themepaths file to house function which will take in name of the theme and return the css file path. 
+    const [defaultTheme, setDefaultTheme] = useState('atom-one-dark')
+    const [cssPath, setCSSPath] = useState("%PUBLIC_URL%/atom-one-dark.css")
 
     useEffect(() => {
+        const provideCSSPath = (theme) => {
+            return `/${theme}.css`
+        }
         setCSSPath(provideCSSPath(defaultTheme))
     }, [defaultTheme])
 
-    // next step: use helmet to assign the css file to the document head based on the selected theme
+    // Next Step: create database entries to house code examples. Create fetch request to pull code examples into an array for display in the codeblock example. May want to place this in the codeblock component itself.
 
     return(
             <section>
+                <Helmet>
+                    <link rel="stylesheet" href={cssPath} />
+                </Helmet>
                 <form>
                     <div>
                         <label>Default Language</label>
                         <select onChange={(e) => setDefaultLanguage(e.target.value)}>
-                            <option value={'javascript'}>Javascript</option>
-                            <option value={'typescript'}>Typescript</option>
-                            <option value={'python'}>Python</option>
+                            {languages}
                         </select>
                     </div>
                     <div>
                         <label>Syntax Highlight Theme</label>
                         <select onChange={(e) => setDefaultTheme((e.target.value)) }>
-                            <option value={'atom one dark'}>Atom One Dark</option>
-                            <option value={'atom one reasonable'}>Atom One Reasonable</option>
+                            {themes}
                         </select>
 
                         <CodeBlockSample 

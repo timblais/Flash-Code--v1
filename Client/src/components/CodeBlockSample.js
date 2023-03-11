@@ -54,6 +54,8 @@ const CodeBlockSample = ({ language,  }) => {
         >>> message = '''interpreter
         ... prompt'''`,
 
+        plaintext: 'This is an example of plaintext without using code block styling. But what if I add something like: let variable = function(){}'
+
     }
 
     for (const lang in langs){
