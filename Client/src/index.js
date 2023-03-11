@@ -63,6 +63,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { Auth0ProviderWithNavigate } from "./auth0";
+import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 
 const container = document.getElementById("root");
@@ -72,7 +73,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Auth0ProviderWithNavigate>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </React.StrictMode>
