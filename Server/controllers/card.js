@@ -17,6 +17,7 @@ module.exports = {
                 easinessFactor: 2.5,
                 repetitionInterval: 1,
                 totalViews: 0,
+                language: req.body.language,
           });
           res.json('Card created');
         } catch (err) {

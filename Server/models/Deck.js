@@ -23,6 +23,12 @@ const DeckSchema = new mongoose.Schema({
     require: true,
   },
 
+  language: {
+    type: String,
+    default: 'plaintext',
+    require: true,
+  }
+
 });
 
 module.exports = mongoose.model("Deck", DeckSchema);

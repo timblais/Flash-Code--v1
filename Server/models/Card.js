@@ -62,6 +62,12 @@ const CardSchema = new mongoose.Schema({
     type: Number,
     default: 0,
     require: true,
+  },
+
+  language: {
+    type: String,
+    default: 'plaintext',
+    require: true,
   }
 
 });

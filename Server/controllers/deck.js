@@ -8,6 +8,7 @@ module.exports = {
             createdBy: req.body.user,
             createdDate: new Date(),
             title: req.body.deckTitle,
+            language: req.body.language,
             totalCards: 0,
           });
           res.json('Deck has been created');
@@ -41,8 +42,11 @@ module.exports = {
 
         for (const card of cards){
           if(decksAndCards[card['deck']]){
-            let date = Date.parse(card['dueDate'])
-            if(date <= new Date()){
+            let date = new Date(card['dueDate'])
+            let tomorrow = new Date()
+            tomorrow.setHours(24,0,0,0)
+            if(date <= tomorrow){
+              console.log(true)
               decksAndCards[card['deck']][1].push(card)
             }
           }
