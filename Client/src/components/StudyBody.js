@@ -85,10 +85,10 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
         if(n === 0){
             addSeconds = 600
         }else{
-            addSeconds = (86400*I)
+            addSeconds = (86400*I) // seconds per day
         }
         
-        let nextDue = Date.now() + addSeconds*1000
+        let nextDue = Date.now() + addSeconds*1000 // convert to milliseconds
 
         console.log(n, I, EF, addSeconds, nextDue)
 
@@ -133,7 +133,7 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
                     <div className="sm:w-[625px] sm:h-95% sm:border-4 sm:border-gray-800 sm:mx-2 flex flex-col justify-start items-center">
                         <div className='sm:w-[600px] h-[400px] m-2 overflow-y-auto bg-[#282c34] relative'>
                             <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
-                                <Highlight className="javascript">
+                                <Highlight className={card.language}>
                                     {card.question}
                                 </Highlight>
                             </pre>
@@ -163,7 +163,7 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
                             <div className='w-[600px] h-[400px] m-2 overflow-y-auto bg-[#282c34] relative'>
                                 <ScrollSyncPane>
                                     <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
-                                        <Highlight className="javascript">
+                                        <Highlight className={card.language}>
                                             {userAnswer}
                                         </Highlight>
                                     </pre>
@@ -200,7 +200,7 @@ const StudyBody = ({ cardArray, updateCardArray}) => {
                     <div className="sm:w-[625px] sm:h-95% sm:border-4 sm:border-gray-800 sm:mx-2 flex flex-col justify-start items-center">
                         <div className='w-[600px] h-[400px] m-2 overflow-y-auto bg-[#282c34] relative'>
                             <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
-                                <Highlight className="javascript">
+                                <Highlight className={card.language}>
                                     {card.answer}
                                 </Highlight>
                             </pre>

@@ -28,7 +28,7 @@ const languageIds = [
 ]
 
 // placeholder: replace with context from preferences
-const defaultLang = 'typescript'
+const defaultLang = 'plaintext'
 
 const languages = []
 for(const lang of languageIds){

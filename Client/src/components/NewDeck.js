@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from './buttons/Button'
+import { languages } from './utils/languagesAndThemes';
 
 
 const NewDeck = ({ deckRefresh }) => {
     const { user } = useAuth0();
     const [enterNewDeck, setEnterNewDeck] = useState(false)
-    const [formValue, setFormValue] = useState(null)
+    const [deckTitle, setDeckTitle] = useState(null)
+    const [defaultLanguage, setDefaultLanguage] = useState('plaintext') // need to update this to pull from context for default preference
 
     const handleClick = (event) => {
         setEnterNewDeck(true)
@@ -19,7 +21,8 @@ const NewDeck = ({ deckRefresh }) => {
                     method: 'POST',
                     headers: {'Content-type': 'application/json'},
                     body: JSON.stringify({
-                        'deckTitle': formValue,
+                        'deckTitle': deckTitle,
+                        'language': defaultLanguage,
                         'user': user.sub
                     })
                 })
@@ -48,7 +51,10 @@ const NewDeck = ({ deckRefresh }) => {
                 e.preventDefault();
                 console.log('submitted worked');
             }}>
-                <input placeholder='Enter a Deck Name' name='deckTitle' id='deckTitle' onChange={(e) => setFormValue(e.target.value)} />
+                <input placeholder='Enter a Deck Name' name='deckTitle' id='deckTitle' onChange={(e) => setDeckTitle(e.target.value)} />
+                <select onChange={(e) => setDefaultLanguage(e.target.value)}>
+                    {languages}
+                </select>
                 <Button 
                     type = 'button'
                     name = 'Submit New Deck'

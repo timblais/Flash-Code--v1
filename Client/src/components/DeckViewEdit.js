@@ -15,7 +15,7 @@ const DeckViewEdit = ({ deckId }) => {
     console.log(deckId)
 
 
-    function showClickedCard(cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, ){
+    function showClickedCard(cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, language){
         console.log('click passed up')
         setCardDisplay({
             newCard: false,
@@ -32,6 +32,7 @@ const DeckViewEdit = ({ deckId }) => {
             easinessFactor: easinessFactor, 
             repetitionInterval: repetitionInterval, 
             totalViews: totalViews, 
+            language: language,
         })
         setSelectedCard(cardId)
         console.log(cardId)
@@ -42,6 +43,7 @@ const DeckViewEdit = ({ deckId }) => {
         setCardDisplay({
             newCard: true,
             deck: deckId,
+            language: returnedDeck['language']
         })
     }
     
@@ -97,6 +99,7 @@ const DeckViewEdit = ({ deckId }) => {
                 easinessFactor = {card['easinessFactor']}
                 repetitionInterval = {card['repetitionInterval']}
                 totalViews = {card['totalViews']}
+                language = {card['language']}
                 displayThisCard = {showClickedCard}
                 selected = {selectedCard}
 
@@ -139,6 +142,7 @@ const DeckViewEdit = ({ deckId }) => {
                     easinessFactor = {cardDisplay.easinessFactor}
                     repetitionInterval = {cardDisplay.repetitionInterval}
                     totalViews = {cardDisplay.totalViews}
+                    language = {cardDisplay.language}
                     saveAndRefresh = {saveAndRefresh}
                 />
              </section>

@@ -1,7 +1,7 @@
 import CardHeader from "./CardHeader";
 import CardForm from "./CardForm";
 
-const CardDisplay = ({ newCard, editCard, savedCard, cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, saveAndRefresh}) => {
+const CardDisplay = ({ newCard, editCard, savedCard, cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, language, saveAndRefresh}) => {
 
     if(savedCard){
         return(
@@ -26,6 +26,7 @@ const CardDisplay = ({ newCard, editCard, savedCard, cardId, createdDate, dueDat
                     easinessFactor = {2.5}
                     repetitionInterval = {1}
                     totalViews = {0}
+                    language = {language}
                     newCard = {true}
                     saveAndRefresh = {saveAndRefresh}
                     
@@ -50,6 +51,7 @@ const CardDisplay = ({ newCard, editCard, savedCard, cardId, createdDate, dueDat
                     easinessFactor = {easinessFactor}
                     repetitionInterval = {repetitionInterval}
                     totalViews = {totalViews}
+                    language = {language}
                     newCard = {false}
                     saveAndRefresh = {saveAndRefresh}  
                 /> 

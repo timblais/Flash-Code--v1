@@ -1,24 +1,24 @@
 import Button from "./buttons/Button";
+import LanguageDropDown from "./languageDropDown";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import Highlight from "react-highlight";
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 
-const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, saveAndRefresh}) => {
+const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, createdBy, deck, question, answer, repetitionNumber, easinessFactor, repetitionInterval, totalViews, language, saveAndRefresh}) => {
 
     const { user } = useAuth0();
     const [questionValue, setQuestionValue] = useState();
     const [answerValue, setAnswerValue]  = useState();
+    const [languageValue, setLanguageValue] =useState(language)
     const [activeEdit, setActiveEdit] = useState(editCard)
-
-    console.log(questionValue)
-    console.log(answerValue)
 
     useEffect(() => {
         setActiveEdit(false)
         setQuestionValue(question)
         setAnswerValue(answer)
-    }, [cardId, question, answer])
+        setLanguageValue(language)
+    }, [cardId, question, answer, language])
 
     const cardSaved = () => {
         saveAndRefresh()
@@ -34,6 +34,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                     'deckId': deck,
                     'question': questionValue,
                     'answer': answerValue,
+                    'language': languageValue,
                 })
             })
             const data = await response.json()
@@ -53,6 +54,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                     'cardId': cardId,
                     'question': questionValue,
                     'answer': answerValue,
+                    'language': languageValue,
                 })
             })
             const data = await response.json()
@@ -72,6 +74,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                     'cardId': cardId,
                     'question': questionValue,
                     'answer': answerValue,
+                    'language': languageValue,
                 })
             })
             const data = await response.json()
@@ -110,6 +113,14 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
         return(
             <section>
                 <form className="flex flex-col justify-start items-center">
+                    <div className="flex justify-center items-center">
+                        <label className="mx-2">Select a Language:</label>
+                        <select onChange={(e) => setLanguageValue(e.target.value)}>
+                            <LanguageDropDown 
+                                defaultLanguage={language}
+                            />
+                        </select>
+                    </div>
                     <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
                         <div className="flex flex-col justify-start items-start py-1 px-4">
                             <label className="w-full bg-gray-300 px-2 rounded-t-md">
@@ -119,7 +130,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                                 <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
                                     <ScrollSyncPane>
                                         <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
-                                            <Highlight className="javascript">
+                                            <Highlight className={languageValue}>
                                                 {questionValue}
                                             </Highlight>
                                         </pre>
@@ -142,7 +153,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                                 <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
                                     <ScrollSyncPane>
                                         <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
-                                            <Highlight className="javascript">
+                                            <Highlight className={languageValue}>
                                                 {answerValue}
                                             </Highlight>
                                         </pre>
@@ -171,6 +182,10 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
         return(
             <section>
                 <div className="w-full flex flex-col justify-start items-center">
+                    <div className="flex justify-center items-center">
+                        <label className="mx-2">Language:</label>
+                        <span>{language[0].toUpperCase() + language.substring(1)}</span>
+                    </div>
                     <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
                         <div className="flex flex-col justify-start items-start py-1 px-4">
                             <label className="w-full bg-gray-300 px-2 rounded-t-md">
@@ -178,7 +193,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                             </label>
                             <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
                                 <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
-                                    <Highlight className="javascript">
+                                    <Highlight className={languageValue}>
                                         {questionValue}
                                     </Highlight>
                                 </pre>
@@ -190,7 +205,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                             </label>
                             <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
                                 <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
-                                    <Highlight className="javascript">
+                                    <Highlight className={languageValue}>
                                         {answerValue}
                                     </Highlight>
                                 </pre>
@@ -210,6 +225,14 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
         return(
             <section className="w-full">
                 <form className="w-full flex flex-col justify-start items-center">
+                    <div className="flex justify-center items-center">
+                        <label className="mx-2">Select a Language:</label>
+                        <select onChange={(e) => setLanguageValue(e.target.value)}>
+                            <LanguageDropDown 
+                                defaultLanguage={language}
+                            />
+                        </select>
+                    </div>
                     <div className="w-full flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
                         <div className="flex flex-col justify-start items-start py-1 px-4">
                             <label className="w-full bg-gray-300 px-2 rounded-t-md">
@@ -219,7 +242,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                                 <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
                                     <ScrollSyncPane>
                                         <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0 shadow-lg' >
-                                            <Highlight className="javascript">
+                                            <Highlight className={languageValue}>
                                                 {questionValue}
                                             </Highlight>
                                         </pre>
@@ -242,7 +265,7 @@ const CardForm = ({ newCard, editCard, cardId, createdDate, dueDate, title, crea
                                 <div className='w-[500px] h-[190px] overflow-y-auto bg-[#282c34] relative'>
                                     <ScrollSyncPane>
                                         <pre className='w-full h-full overflow-y-auto overflow-x-auto bg-[#282c34] whitespace-pre-wrap absolute top-0 left-0' >
-                                            <Highlight className="javascript">
+                                            <Highlight className={languageValue}>
                                                 {answerValue}
                                             </Highlight>
                                         </pre>
